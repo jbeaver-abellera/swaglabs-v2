@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+markers = [
+    "Fail: Tests that are should fail"
+]
