@@ -44,6 +44,7 @@ def test_problem_user(setup_teardown):
         removedItems = [inventoryPage.clickItemBtn(1)]
         item_count = len(checkedOutItems) - len(removedItems)
     except Exception as e:
+        utils.takeScreenshot(test_case, inventoryPage.driver)
         error_list.append(f"{str(e)}")
 
     '''

@@ -48,6 +48,7 @@ def test_error_user(setup_teardown):
         removedItems = [inventoryPage.clickItemBtn(3)]
         item_count = len(checkedOutItems) - len(removedItems)
     except UnexpectedAlertPresentException as e:
+        utils.takeScreenshot(test_case, inventoryPage.driver)
         error_list.append(f"Unexpected Alert Error: {e.alert_text}")
         item_count = 0
     except Exception as e:
@@ -61,6 +62,7 @@ def test_error_user(setup_teardown):
     cartPage = inventoryPage.checkCart()
     cart_items = cartPage.itemList 
     if len(cart_items) != item_count:
+        utils.takeScreenshot(test_case, cartPage.driver)
         error_list.append(f"Error on cart page. Items in cart not equal to clicked items")
        
     '''
@@ -86,6 +88,7 @@ def test_error_user(setup_teardown):
     '''
     checkOutFinalItemList = checkOutFinalPage.itemList
     if len(checkOutFinalItemList) != item_count:
+        utils.takeScreenshot(test_case, checkOutFinalPage.driver)
         error_list.append("Error on final info page. Items in final info not equal to clicked items")
     
     '''
@@ -95,6 +98,7 @@ def test_error_user(setup_teardown):
     try:
         orderSuccessPage = checkOutFinalPage.finish()
     except Exception as e:
+        utils.takeScreenshot(test_case, orderSuccessPage.driver)
         error_list.append(f"{str(e)}")
         checkOutFinalPage.logout()
         assert False, f"{error_list}"
@@ -105,6 +109,7 @@ def test_error_user(setup_teardown):
     - Should have a "Thank you" or successful message
     '''
     if "Thank you" not in orderMessage:
+        utils.takeScreenshot(test_case, orderSuccessPage.driver)
         error_list.append("Error on end page. Order not successful")
     
     orderSuccessPage.logout()
