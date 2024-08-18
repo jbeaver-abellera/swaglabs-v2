@@ -6,7 +6,7 @@ from conftest import suite_conftest
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
 # Success credentials
-username = 'problem_user'
+username = 'standard_user'
 password = 'secret_sauce'
 
 @pytest.fixture(scope='module')
@@ -101,10 +101,8 @@ def test_order_success(setup_teardown):
         error_list.append("Error on end page. Order not successful")
         utils.takeScreenshot(test_case, orderSuccessPage.driver)
 
-            
+          
     assert len(error_list) == 0, f"{error_list}"
     
-    #Cleanup
-    orderSuccessPage.logout()
     
     

@@ -24,6 +24,7 @@ def setup_teardown(suite_conftest):
 @pytest.mark.Error
 def test_locked_out_user(setup_teardown):
     error_list = []
+    test_case = "locked_out_user"
     loginPage = setup_teardown
     
     '''

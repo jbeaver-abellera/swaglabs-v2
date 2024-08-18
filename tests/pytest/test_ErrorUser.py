@@ -22,9 +22,11 @@ def setup_teardown(suite_conftest):
     loginPage.openLoginPage()
     
     yield loginPage
+    
 
 def test_error_user(setup_teardown):
     error_list = []
+    test_case = "error_user"
     loginPage = setup_teardown
     
     '''
@@ -104,7 +106,8 @@ def test_error_user(setup_teardown):
     '''
     if "Thank you" not in orderMessage:
         error_list.append("Error on end page. Order not successful")
-    assert len(error_list) == 0, f"{error_list}"
+    
     orderSuccessPage.logout()
+    assert len(error_list) == 0, f"{error_list}"
     
     

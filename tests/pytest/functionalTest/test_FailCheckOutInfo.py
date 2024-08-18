@@ -23,6 +23,7 @@ def setup_teardown(suite_conftest):
 @pytest.mark.Error
 def test_failCheckOutInfo(setup_teardown):
     error_list = []
+    test_case = "Failed_Checkout_Info"
     loginPage = setup_teardown
     
     '''
