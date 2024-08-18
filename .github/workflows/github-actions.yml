@@ -56,7 +56,7 @@ jobs:
         name: pytest-results
         path: | 
           results/pytest/test-results.xml
-          results/screenhots/*
+          results/screenhots/*.png
 
 
     - name: Upload locust results

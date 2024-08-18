@@ -1,9 +1,7 @@
-junit/
 __pycache__/
 PageClasses/__pycache__/
 tests/__pycache__/
 utils/__pycache__/
-screenshots/
 chromedriver-win64.zip
 .venv/
 .pytest_cache

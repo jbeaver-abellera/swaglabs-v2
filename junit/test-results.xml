@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="5" time="12.011" timestamp="2024-08-18T00:51:07.779953+08:00" hostname="TUFLaptop-Beaver"><testcase classname="tests.functionalTest.test_FailCheckOutInfo" name="test_failCheckOutInfo" time="5.285" /><testcase classname="tests.functionalTest.test_FailLockedOut" name="test_locked_out_user" time="0.279" /><testcase classname="tests.test_1Success" name="test_order_success" time="1.582" /><testcase classname="tests.test_ErrorUser" name="test_error_user" time="1.314"><failure message="AssertionError: ['Sorting is broken! This error has been reported to Backtrace.', 'Failure on checkout finalization page. Cannot finish order']&#10;assert False">setup_teardown = &lt;PageClasses.LoginPage.LoginPage object at 0x000002064E6262D0&gt;
+
+    def test_error_user(setup_teardown):
+        error_list = []
+        loginPage = setup_teardown
+    
+        '''
+        ## Check Login Functionality
+        - login() function has built in logic that raises exception if an error message pops up
+        '''
+        inventoryPage = loginPage.login(username, password)
+    
+        '''
+        ## Test inventory page
+        - Should sort the items accordingly
+        - Should add to cart n items
+        - Should remove 1 item
+        '''
+    
+        inventoryPage.sortItemsBy(utils.Constants.SORT_METHOD)
+        try:
+            checkedOutItems = [inventoryPage.clickItemBtn(1), inventoryPage.clickItemBtn(2), inventoryPage.clickItemBtn(3)]
+            removedItems = [inventoryPage.clickItemBtn(3)]
+            item_count = len(checkedOutItems) - len(removedItems)
+        except UnexpectedAlertPresentException as e:
+            error_list.append(f"{e.alert_text}")
+            item_count = 0
+        except Exception as e:
+            error_list.append(f"{str(e)}")
+            item_count = 2
+    
+        '''
+        ## Test cart page
+        - Cart info should be same as items clicked on previous test
+        '''
+        cartPage = inventoryPage.checkCart()
+        cart_items = cartPage.itemList
+        if len(cart_items) != item_count:
+            error_list.append(f"Error on cart page. Items in cart not equal to clicked items")
+    
+        '''
+        ## Test on shipping information
+        '''
+        checkOutInfoPage = cartPage.checkOut()
+        firstName = "Swagger"
+        lastName = "User"
+        postalCode = "1234"
+        checkOutInfoPage.enterInfo(firstName=firstName,
+                                    lastName=lastName,
+                                    postalCode=postalCode)
+    
+        '''
+        confirm() function has built in logic that raises exception if an error message pops up
+        '''
+        checkOutFinalPage = checkOutInfoPage.confirm()
+    
+        '''
+        ## Test final order info
+        - Items should be equal to added items on inventory page
+        - TO DO: confirm correct checkout info (Name, Address, Payment Method, Total)
+        '''
+        checkOutFinalItemList = checkOutFinalPage.itemList
+        if len(checkOutFinalItemList) != item_count:
+            error_list.append("Error on final info page. Items in final info not equal to clicked items")
+    
+        '''
+        ## Go to final / result page
+        Checks if order was successful
+        '''
+        try:
+&gt;           orderSuccessPage = checkOutFinalPage.finish()
+
+tests\test_ErrorUser.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;PageClasses.CheckOutFinalPage.CheckOutFinalPage object at 0x000002064E626F30&gt;
+
+    def finish(self):
+        finishBtn = self.driver.find_element(By.ID, "finish")
+        finishBtn.click()
+        try:
+            finishBtn.is_displayed()
+&gt;           raise Exception("Failure on checkout finalization page. Cannot finish order")
+E           Exception: Failure on checkout finalization page. Cannot finish order
+
+PageClasses\CheckOutFinalPage.py:23: Exception
+
+During handling of the above exception, another exception occurred:
+
+setup_teardown = &lt;PageClasses.LoginPage.LoginPage object at 0x000002064E6262D0&gt;
+
+    def test_error_user(setup_teardown):
+        error_list = []
+        loginPage = setup_teardown
+    
+        '''
+        ## Check Login Functionality
+        - login() function has built in logic that raises exception if an error message pops up
+        '''
+        inventoryPage = loginPage.login(username, password)
+    
+        '''
+        ## Test inventory page
+        - Should sort the items accordingly
+        - Should add to cart n items
+        - Should remove 1 item
+        '''
+    
+        inventoryPage.sortItemsBy(utils.Constants.SORT_METHOD)
+        try:
+            checkedOutItems = [inventoryPage.clickItemBtn(1), inventoryPage.clickItemBtn(2), inventoryPage.clickItemBtn(3)]
+            removedItems = [inventoryPage.clickItemBtn(3)]
+            item_count = len(checkedOutItems) - len(removedItems)
+        except UnexpectedAlertPresentException as e:
+            error_list.append(f"{e.alert_text}")
+            item_count = 0
+        except Exception as e:
+            error_list.append(f"{str(e)}")
+            item_count = 2
+    
+        '''
+        ## Test cart page
+        - Cart info should be same as items clicked on previous test
+        '''
+        cartPage = inventoryPage.checkCart()
+        cart_items = cartPage.itemList
+        if len(cart_items) != item_count:
+            error_list.append(f"Error on cart page. Items in cart not equal to clicked items")
+    
+        '''
+        ## Test on shipping information
+        '''
+        checkOutInfoPage = cartPage.checkOut()
+        firstName = "Swagger"
+        lastName = "User"
+        postalCode = "1234"
+        checkOutInfoPage.enterInfo(firstName=firstName,
+                                    lastName=lastName,
+                                    postalCode=postalCode)
+    
+        '''
+        confirm() function has built in logic that raises exception if an error message pops up
+        '''
+        checkOutFinalPage = checkOutInfoPage.confirm()
+    
+        '''
+        ## Test final order info
+        - Items should be equal to added items on inventory page
+        - TO DO: confirm correct checkout info (Name, Address, Payment Method, Total)
+        '''
+        checkOutFinalItemList = checkOutFinalPage.itemList
+        if len(checkOutFinalItemList) != item_count:
+            error_list.append("Error on final info page. Items in final info not equal to clicked items")
+    
+        '''
+        ## Go to final / result page
+        Checks if order was successful
+        '''
+        try:
+            orderSuccessPage = checkOutFinalPage.finish()
+        except Exception as e:
+            error_list.append(f"{str(e)}")
+            checkOutFinalPage.logout()
+&gt;           assert False, f"{error_list}"
+E           AssertionError: ['Sorting is broken! This error has been reported to Backtrace.', 'Failure on checkout finalization page. Cannot finish order']
+E           assert False
+
+tests\test_ErrorUser.py:98: AssertionError</failure></testcase><testcase classname="tests.test_ProblemUser" name="test_problem_user" time="3.243"><failure message="Exception: Error: Item 2 button did not change text/state">setup_teardown = &lt;PageClasses.LoginPage.LoginPage object at 0x000002064E627380&gt;
+
+    def test_problem_user(setup_teardown):
+        loginPage = setup_teardown
+    
+        '''
+        ## Check Login Functionality
+        - login() function has built in logic that raises exception if an error message pops up
+        '''
+        inventoryPage = loginPage.login(username, password)
+    
+        '''
+        ## Test inventory page
+        - Should sort the items accordingly
+        - Should add to cart n items
+        '''
+        inventoryPage.sortItemsBy(utils.Constants.SORT_METHOD)
+&gt;       checkedOutItems = [inventoryPage.clickItemBtn(1), inventoryPage.clickItemBtn(2)]
+
+tests\test_ProblemUser.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;PageClasses.InventoryPage.InventoryPage object at 0x000002064E6277D0&gt;, n = 2
+
+    def clickItemBtn(self, n):
+        items = self.driver.find_elements(By.CLASS_NAME, "inventory_item")
+        Btn = items[n].find_element(By.CLASS_NAME, "btn_inventory")
+        BtnText = Btn.text
+        Btn.click()
+        newBtnText = items[n].find_element(By.CLASS_NAME, "btn_inventory").text
+        if newBtnText == BtnText:
+&gt;           raise Exception(f"Error: Item {n} button did not change text/state")
+E           Exception: Error: Item 2 button did not change text/state
+
+PageClasses\InventoryPage.py:51: Exception</failure></testcase></testsuite></testsuites>
