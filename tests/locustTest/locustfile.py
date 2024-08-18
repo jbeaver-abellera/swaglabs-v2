@@ -1,6 +1,6 @@
 import time
 from locust import HttpUser, task, between
-from Constants import Constants
+from utils.Constants import Constants
 
 class loadTest(HttpUser):
     wait_time = between(1, 5)

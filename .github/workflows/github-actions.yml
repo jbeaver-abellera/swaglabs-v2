@@ -42,7 +42,7 @@ jobs:
       env:
         DISPLAY: :99.0
       run: |
-        pytest -v --maxfail=10 --disable-warnings --junitxml=junit/test-results.xml || true ; locust --headless --users 10 --spawn-rate 5 --run-time=30s --stop-timeout=10s --csv beaver-test --host https://www.saucedemo.com/
+        pytest -v --maxfail=10 --disable-warnings --junitxml=junit/test-results.xml || true ; locust --headless --users 10 --spawn-rate 5 --run-time=30s --stop-timeout=10s --csv beaver-test --host https://www.saucedemo.com/ -f ./tests/locustTest/locustfile.py
 
     - name: Generate test report
       run: |
