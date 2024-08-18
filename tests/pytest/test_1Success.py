@@ -6,7 +6,7 @@ from conftest import suite_conftest
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
 # Success credentials
-username = 'standard_user'
+username = 'problem_user'
 password = 'secret_sauce'
 
 @pytest.fixture(scope='module')

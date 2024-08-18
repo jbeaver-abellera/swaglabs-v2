@@ -4,3 +4,12 @@ markers = [
 ]
 log_cli_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 log_cli_level = "WARNING"
+
+[tool.locust]
+locustfile = "./tests/locustTest/locustfile.py"
+headless = true
+host = "https://www.saucedemo.com/"
+csv = "./results/locust/beaver-tests"
+users = 10
+spawn-rate = 5
+run-time = "30s"
