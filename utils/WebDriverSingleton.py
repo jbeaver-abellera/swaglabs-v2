@@ -19,9 +19,9 @@ class WebDriverSingleton:
         if not cls._driver:
             chrome_options = Options()
             if isHeadless != False:
-                chrome_options.add_argument("--headless")
+                chrome_options.add_argument("--headless=new")
                 chrome_options.add_argument("--disable-gpu")
-            cls._driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+            cls._driver = webdriver.Chrome(options=chrome_options)
         return cls._driver
     
     @classmethod

@@ -1,0 +1,4 @@
+locust --headless --users 10 --spawn-rate 5 --run-time=30s --stop-timeout=10s --csv beaver-test --host https://www.saucedemo.com/
+> but the problem here is, isang web link lang sya(--host<space><link>).
+    > can test on multi domains or paths of ur website, but not other links? 
+    > aaralin pa

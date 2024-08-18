@@ -42,7 +42,7 @@ jobs:
       env:
         DISPLAY: :99.0
       run: |
-        pytest -v --maxfail=10 --disable-warnings --junitxml=junit/test-results.xml || true
+        pytest -v --maxfail=10 --disable-warnings --junitxml=junit/test-results.xml || true ; locust --headless --users 10 --spawn-rate 5 --run-time=30s --stop-timeout=10s --csv beaver-test --host https://www.saucedemo.com/
 
     - name: Generate test report
       run: |
@@ -50,9 +50,13 @@ jobs:
         echo "::set-output name=report_path::junit/test-results.xml"
         echo "Test report generated."
     
-    - name: Upload test results
+    - name: Upload pytest results
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
+        name: pytest-results
         path: junit/test-results.xml
-      
+    - name: Upload locust results
+      uses: actions/upload-artifact@v4
+      with:
+        name: locust-results
+        path: utils/beaver-test*

@@ -20,7 +20,7 @@ def setup_teardown(suite_conftest):
     
     yield loginPage
 
-@pytest.mark.Fail
+@pytest.mark.Error
 def test_failCheckOutInfo(setup_teardown):
     error_list = []
     loginPage = setup_teardown

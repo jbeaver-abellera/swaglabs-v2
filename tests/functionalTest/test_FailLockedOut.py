@@ -21,7 +21,7 @@ def setup_teardown(suite_conftest):
     yield loginPage
 
 # @pytest.mark.xfail(raises=Exception, strict=True)
-@pytest.mark.Fail
+@pytest.mark.Error
 def test_locked_out_user(setup_teardown):
     error_list = []
     loginPage = setup_teardown

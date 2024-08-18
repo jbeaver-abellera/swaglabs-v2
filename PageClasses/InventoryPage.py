@@ -34,7 +34,6 @@ class InventoryPage(pc.BasePage):
         
     def addToCartItem(self, rank):
         addToCartBtns = self.driver.find_elements(By.XPATH, "//button[starts-with(@id,'add-to-cart-')]")
-        print(len(addToCartBtns))
         addToCartBtn = addToCartBtns[rank]
         addToCartBtn.click()
     

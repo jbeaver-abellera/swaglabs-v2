@@ -1,11 +1,7 @@
 import utils
 import PageClasses as pc
-from selenium.webdriver.remote.webelement import WebElement
 import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
 from conftest import suite_conftest
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
@@ -22,6 +18,7 @@ def setup_teardown(suite_conftest):
     yield loginPage
     
 def test_order_success(setup_teardown):
+    test_case = "order_success"
     error_list = []
     loginPage = setup_teardown
     
@@ -45,9 +42,11 @@ def test_order_success(setup_teardown):
         item_count = len(checkedOutItems) - len(removedItems)
     except UnexpectedAlertPresentException as e:
         error_list.append(f"{e.alert_text}")
+        utils.takeScreenshot(test_case, inventoryPage.driver)
         item_count = 0
     except Exception as e:
         error_list.append(f"{str(e)}")
+        utils.takeScreenshot(test_case, inventoryPage.driver)
         item_count = 2
     
     '''
@@ -58,6 +57,8 @@ def test_order_success(setup_teardown):
     cart_items = cartPage.itemList 
     if len(cart_items) != item_count:
         error_list.append(f"Error on cart page. Items in cart not equal to clicked items")
+        utils.takeScreenshot(test_case, cartPage.driver)
+        
        
     '''
     ## Test on shipping information 
@@ -83,6 +84,7 @@ def test_order_success(setup_teardown):
     checkOutFinalItemList = checkOutFinalPage.itemList
     if len(checkOutFinalItemList) != item_count:
         error_list.append("Error on final info page. Items in final info not equal to clicked items")
+        utils.takeScreenshot(test_case, checkOutFinalPage.driver)
     
     '''
     ## Go to final / result page
@@ -96,8 +98,9 @@ def test_order_success(setup_teardown):
     - Should have a "Thank you" or successful message
     '''
     if "Thank you" not in orderMessage:
-        error_list.append("Error on end page. Order not successful")\
-            
+        error_list.append("Error on end page. Order not successful")
+        utils.takeScreenshot(test_case, orderSuccessPage.driver)
+
             
     assert len(error_list) == 0, f"{error_list}"
     

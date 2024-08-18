@@ -1,4 +1,6 @@
 [tool.pytest.ini_options]
 markers = [
-    "Fail: Tests that are should fail"
+    "Error: Tests that are should fail"
 ]
+log_cli_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+log_cli_level = "WARNING"

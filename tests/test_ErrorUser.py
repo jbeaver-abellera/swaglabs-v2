@@ -46,7 +46,7 @@ def test_error_user(setup_teardown):
         removedItems = [inventoryPage.clickItemBtn(3)]
         item_count = len(checkedOutItems) - len(removedItems)
     except UnexpectedAlertPresentException as e:
-        error_list.append(f"{e.alert_text}")
+        error_list.append(f"Unexpected Alert Error: {e.alert_text}")
         item_count = 0
     except Exception as e:
         error_list.append(f"{str(e)}")

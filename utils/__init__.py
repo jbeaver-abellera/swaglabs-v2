@@ -1,2 +1,3 @@
 from utils.Constants import Constants
+from utils.TakeScreenshots import takeScreenshot
 from utils.WebDriverSingleton import WebDriverSingleton
