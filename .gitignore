@@ -5,3 +5,4 @@ utils/__pycache__/
 chromedriver-win64.zip
 .venv/
 .pytest_cache
+tests/pytest/sandboxtestss.py

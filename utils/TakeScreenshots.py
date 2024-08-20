@@ -17,4 +17,5 @@ def takeScreenshot(test_case: str, driver: webdriver) -> str:
     os.makedirs(base_dir, exist_ok=True)
 
     # Capture and save the screenshot
+    driver.maximize_window()
     driver.save_screenshot(screenshot_path)
