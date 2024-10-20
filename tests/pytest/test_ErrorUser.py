@@ -28,7 +28,7 @@ def test_error_user(setup_teardown):
     error_list = []
     test_case = "error_user"
     loginPage = setup_teardown
-    x = 888
+    x = 'hello world'
     
     '''
     ## Check Login Functionality
