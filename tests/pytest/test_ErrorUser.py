@@ -29,7 +29,7 @@ def test_error_user(setup_teardown):
     test_case = "error_user"
     loginPage = setup_teardown
     x = 9999
-    
+
     '''
     ## Check Login Functionality
     - login() function has built in logic that raises exception if an error message pops up
