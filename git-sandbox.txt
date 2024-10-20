@@ -1,0 +1,11 @@
+line of text to commit in feature/WMP-996
+line2-W996 commit1
+line3-sandbox1 commit 1
+line4-sandbox1 commit 2
+line5-W996 commit 2
+line6-W996 commit 3
+<<<<<<< HEAD
+line7 - W996 commit 4
+=======
+line7-sandbox1 commit 3
+>>>>>>> feature/sandbox1
